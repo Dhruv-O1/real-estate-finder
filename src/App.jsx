@@ -15,7 +15,7 @@ function App() {
 
   return (
     
-      <body className='layout-fixed sidebar-expand-lg bg-body-tertiary sidebar-open app-loadedgi'>
+      <body className='layout-fixed sidebar-expand-lg bg-body-tertiary sidebar-open app-loaded'>
         <div className='app-wrapper'>
           <Routes>
             <Route path='/user' element={<UserSidebar></UserSidebar>}></Route>
