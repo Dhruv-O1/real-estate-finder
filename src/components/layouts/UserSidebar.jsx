@@ -1,6 +1,6 @@
 import React from 'react'
 import { UserNavbar } from './UserNavbar'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 export const UserSidebar = () => {
   return (
@@ -15,7 +15,7 @@ export const UserSidebar = () => {
           <a href="./index.html" className="brand-link">
             
             <img
-              src="../../dist/assets/img/AdminLTELogo.png"
+              src="./assets/img/AdminLTELogo.png"
               alt="AdminLTE Logo"
               className="brand-image opacity-75 shadow"
             />
@@ -83,6 +83,12 @@ export const UserSidebar = () => {
                   <i className="nav-icon bi bi-palette" />
                   <p>Theme Generate</p>
                 </a>
+              </li>
+              <li className="nav-item">
+                <Link to='/user/add-property' className="nav-link">
+                  <i className="nav-icon bi bi-palette" />
+                  <p>Add Property</p>
+                </Link>
               </li>
               <li className="nav-item">
                 <a href="#" className="nav-link">

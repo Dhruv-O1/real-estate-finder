@@ -46,7 +46,8 @@ export const UserNavbar = () => {
       {/*begin::Messages Dropdown Menu*/}
       <li className="nav-item dropdown">
         <a className="nav-link" data-bs-toggle="dropdown" href="#">
-          <i className="bi bi-chat-text" />
+        <i className="bi bi-chat-text" />
+
           <span className="navbar-badge badge text-bg-danger">3</span>
         </a>
         <div className="dropdown-menu dropdown-menu-lg dropdown-menu-end">
@@ -55,7 +56,7 @@ export const UserNavbar = () => {
             <div className="d-flex">
               <div className="flex-shrink-0">
                 <img
-                  src="../../dist/assets/img/user1-128x128.jpg"
+                  src="./assets/img/user1-128x128.jpg"
                   alt="User Avatar"
                   className="img-size-50 rounded-circle me-3"
                 />
