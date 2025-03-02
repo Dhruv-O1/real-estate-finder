@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-// import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 export const Signup = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
