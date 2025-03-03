@@ -6,10 +6,13 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import { Signup } from './components/common/Signup'
 import { Login } from './components/common/Login'
 import { AddProperty } from './components/user/AddProperty'
+import axios from 'axios'
 
 function App() {
   // useLocation hook from react router dom to see current end point
   const location = useLocation()
+
+  axios.defaults.baseURL = "http://localhost:4001"
 
   // checking if current route is login or signup
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup'

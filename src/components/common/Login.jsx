@@ -1,13 +1,32 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import headerBackground from "../../assets/img/backgroundForLogin.jpg";
+import background from "../../assets/img/backgroundForLogin2.jpg";
+import axios from 'axios';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 export const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate()
 
-  const submitHandler = (data) => {
+  const submitHandler = async (data) => {
     console.log(data);
+    data.roleId = "67c4b09c8385fb8187120578"
+    const res = await axios.post("http://localhost:4001/user/login",data)
+    console.log(res);
+    if (res.status == 200) {
+      console.log(res.data.data._id );
+      console.log(res.data.data.roleId.name);
+      
+      
+      localStorage.setItem("id", res.data.data._id )
+      localStorage.setItem("role", res.data.data.roleId.name)
+      if (res.data.data.roleId.name == "user") {
+        navigate("/user")
+      }
+    }
+    
   };
 
   const validationSchema = {
@@ -42,47 +61,194 @@ export const Login = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#000000' }}>
-      <div style={{ 
-        backgroundColor: '#19191C', 
-        color: '#FFFFFF', 
-        padding: '24px', 
-        borderRadius: '8px', 
-        boxShadow: '0 0 25px 2px #DF3D6A', // Added shadow here
-        width: '100%', 
-        maxWidth: '480px',
+    <div style={{ 
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
+      backgroundImage: `url(${background})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      position: 'relative'
+    }}>
+      {/* Dark overlay */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: 'rgba(0, 0, 0, 0.6)',
+        backdropFilter: 'blur(5px)'
+      }}></div>
+  
+      <div style={{
+        width: '400px',
+        maxWidth: '90%',
+        backgroundColor: 'white',
+        borderRadius: '15px',
+        overflow: 'hidden',
+        boxShadow: '0 15px 35px rgba(0, 0, 0, 0.3)',
+        position: 'relative',
+        zIndex: 1
       }}>
-        <h2 style={{ textAlign: 'center', fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>Login</h2>
-        <form onSubmit={handleSubmit(submitHandler)}>
-          <span><p style={{ color: '#FFFFFF', fontSize: '12px' }}>{errors.email?.message}</p></span>
-          <div className="mb-3">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              style={{ width: '100%', padding: '8px', border: '1px solid #FFFFFF', backgroundColor: '#19191C', color: '#FFFFFF', borderRadius: '4px' }}
-              {...register("email", validationSchema.emailValidator)}
-            />
+        {/* Header section */}
+        <div style={{
+          height: '160px',
+          backgroundImage: `url(${headerBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          position: 'relative'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(52, 152, 219, 0.7))'
+          }}></div>
+          
+          {/* Logo */}
+          <div style={{
+            position: 'absolute',
+            bottom: '-25px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '80px',
+            height: '80px',
+            borderRadius: '50%',
+            backgroundColor: 'white',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)'
+          }}>
+            <div style={{
+              fontSize: '18px',
+              fontWeight: '700',
+              color: '#34495e'
+            }}>
+              P<span style={{ color: '#3498db' }}>P</span>
+            </div>
           </div>
-          <span><p style={{ color: '#FFFFFF', fontSize: '12px' }}>{errors.password?.message}</p></span>
-          <div className="mb-3">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              style={{ width: '100%', padding: '8px', border: '1px solid #FFFFFF', backgroundColor: '#19191C', color: '#FFFFFF', borderRadius: '4px' }}
-              {...register("password", validationSchema.passwordValidator)}
-            />
+        </div>
+  
+        {/* Form section */}
+        <div style={{ padding: '40px 30px 30px' }}>
+          <h2 style={{
+            color: '#34495e',
+            textAlign: 'center',
+            marginBottom: '30px',
+            fontSize: '22px',
+            fontWeight: '600'
+          }}>
+            Welcome Back
+          </h2>
+  
+          <form onSubmit={handleSubmit(submitHandler)}>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{
+                display: 'block',
+                marginBottom: '8px',
+                color: '#7f8c8d',
+                fontSize: '14px'
+              }}>
+                Email Address
+              </label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                style={{
+                  width: '100%',
+                  padding: '12px 15px',
+                  border: '1px solid #e1e5e8',
+                  borderRadius: '6px',
+                  backgroundColor: '#f7f9fa',
+                  color: '#34495e',
+                  fontSize: '15px',
+                  outline: 'none',
+                  transition: 'all 0.3s'
+                }}
+                {...register("email", validationSchema.emailValidator)}
+              />
+              <span><p style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>{errors.email?.message}</p></span>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{
+                display: 'block',
+                marginBottom: '8px',
+                color: '#7f8c8d',
+                fontSize: '14px'
+              }}>
+                Password
+              </label>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                style={{
+                  width: '100%',
+                  padding: '12px 15px',
+                  border: '1px solid #e1e5e8',
+                  borderRadius: '6px',
+                  backgroundColor: '#f7f9fa',
+                  color: '#34495e',
+                  fontSize: '15px',
+                  outline: 'none',
+                  transition: 'all 0.3s'
+                }}
+                {...register("password", validationSchema.passwordValidator)}
+              />
+              <span><p style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>{errors.password?.message}</p></span>
+            </div>
+  
+            <div style={{ textAlign: 'right', marginBottom: '20px' }}>
+              <Link to="/forgot-password" style={{
+                color: '#3498db',
+                textDecoration: 'none',
+                fontSize: '14px'
+              }}>
+                Forgot Password?
+              </Link>
+            </div>
+  
+            <button
+              type="submit"
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: 'none',
+                borderRadius: '6px',
+                backgroundColor: '#3498db',
+                color: 'white',
+                fontSize: '16px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                boxShadow: '0 4px 6px rgba(52, 152, 219, 0.2)'
+              }}
+            >
+              Login
+            </button>
+          </form>
+  
+          <div style={{
+            textAlign: 'center',
+            marginTop: '20px',
+            color: '#7f8c8d',
+            fontSize: '14px'
+          }}>
+            <p>Don't have an account?{' '}
+              <Link to="/signup" style={{
+                color: '#3498db',
+                textDecoration: 'none',
+                fontWeight: '600'
+              }}>
+                Sign Up
+              </Link>
+            </p>
           </div>
-          <button
-            type="submit"
-            style={{ width: '100%', backgroundColor: '#DF3D6A', color: '#FFFFFF', padding: '8px', borderRadius: '4px', border: 'none', cursor: 'pointer' }}
-          >
-            Login
-          </button>
-        </form>
-        <div style={{ textAlign: 'center', marginTop: '16px' }}>
-          <p style={{ color: '#FFFFFF' }}>Don't have an account? <Link to="/signup" style={{ color: '#DF3D6A', fontWeight: 'bold' }}>Sign Up</Link></p>
         </div>
       </div>
     </div>
