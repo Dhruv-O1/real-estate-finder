@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import headerBackground from "../../assets/img/backgroundForLogin.jpg";
 import background from "../../assets/img/backgroundForLogin2.jpg";
 import axios from 'axios';
+import { Bounce, toast, ToastContainer } from 'react-toastify';
 
 export const Signup = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -13,11 +14,26 @@ export const Signup = () => {
   const submitHandler = async (data) => {
     console.log(data);
 
-    data.roleId = '67c4b09c8385fb8187120578'
+    data.roleId = '67c88cda29c2dbc8ef744954'
     const res = await axios.post("/user",data)
     console.log(res);
+
+
     if (res.status == 200) {
-      navigate("/login")
+      toast.success('Signed up Successfully', {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+      setTimeout(() => {
+        navigate("/login")
+      }, 4000);
     }
     
   };
@@ -88,6 +104,13 @@ export const Signup = () => {
       },
       validate: (value) => value === data?.password || "Password doesn't match",
     },
+    genderValidator: {
+      required: {
+        value: true,
+        message: "Please select your gender"
+      }
+    },
+    
     userTypeValidator: {
       required: {
         value: true,
@@ -150,7 +173,7 @@ export const Signup = () => {
       }}></div>
   
       <div style={{
-        width: '400px',
+        width: '470px',
         maxWidth: '90%',
         backgroundColor: 'white',
         borderRadius: '15px',
@@ -196,13 +219,26 @@ export const Signup = () => {
               fontWeight: '700',
               color: '#34495e'
             }}>
-              P<span style={{ color: '#3498db' }}>P</span>
+              RE<span style={{ color: '#3498db' }}>F</span>
             </div>
           </div>
         </div>
   
-        {/* Form section - Reduced padding and margins */}
+        {/* Form section */}
         <div style={{ padding: '30px 25px 25px' }}>
+        <ToastContainer
+          position="top-left"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Bounce}
+          />
           <h2 style={{
             color: '#34495e',
             textAlign: 'center',
@@ -210,32 +246,115 @@ export const Signup = () => {
             fontSize: '22px',
             fontWeight: '600'
           }}>
-            Create Account
+            Join Us Today!
           </h2>
   
           <form onSubmit={handleSubmit(submitHandler)}>
-            {/* Reduced marginBottom from 20px to 16px */}
-            {[
-              ['firstName', 'First Name', 'text', 'Enter first name'],
-              ['lastName', 'Last Name', 'text', 'Enter last name'],
-              ['email', 'Email Address', 'email', 'Enter email'],
-              ['contact', 'Contact Number', 'tel', 'Enter phone number'],
-              ['password', 'Password', 'password', 'Create password'],
-              // ['confirmPassword', 'Confirm Password', 'password', 'Confirm password']
-            ].map(([name, label, type, placeholder]) => (
-              <div key={name} style={{ marginBottom: '8px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#7f8c8d', fontSize: '14px' }}>
-                  {label}
-                </label>
-                <input
-                  type={type}
-                  placeholder={placeholder}
-                  style={inputStyle}
-                  {...register(name, validationSchema[`${name}Validator`])}
-                />
-                <span><p style={{color:"#e74c3c", fontSize: '12px'}}>{errors[name]?.message}</p></span>
-              </div>
-            ))}
+            
+            {/* First Name */}
+            <div style={{ marginBottom: '8px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', color: '#7f8c8d', fontSize: '14px' }}>
+                First Name
+              </label>
+              <input
+                type="text"
+                placeholder="Enter first name"
+                style={inputStyle}
+                {...register("firstName", validationSchema.firstNameValidator)}
+              />
+              <span><p style={{color:"#e74c3c", fontSize: '12px'}}>{errors.firstName?.message}</p></span>
+            </div>
+
+            {/* Last Name */}
+            <div style={{ marginBottom: '8px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', color: '#7f8c8d', fontSize: '14px' }}>
+                Last Name
+              </label>
+              <input
+                type="text"
+                placeholder="Enter last name"
+                style={inputStyle}
+                {...register("lastName", validationSchema.lastNameValidator)}
+              />
+              <span><p style={{color:"#e74c3c", fontSize: '12px'}}>{errors.lastName?.message}</p></span>
+            </div>
+
+            {/* Email */}
+            <div style={{ marginBottom: '8px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', color: '#7f8c8d', fontSize: '14px' }}>
+                Email Address
+              </label>
+              <input
+                type="email"
+                placeholder="Enter email"
+                style={inputStyle}
+                {...register("email", validationSchema.emailValidator)}
+              />
+              <span><p style={{color:"#e74c3c", fontSize: '12px'}}>{errors.email?.message}</p></span>
+            </div>
+
+            {/* Password */}
+            <div style={{ marginBottom: '8px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', color: '#7f8c8d', fontSize: '14px' }}>
+                Password
+              </label>
+              <input
+                type="password"
+                placeholder="Create password"
+                style={inputStyle}
+                {...register("password", validationSchema.passwordValidator)}
+              />
+              <span><p style={{color:"#e74c3c", fontSize: '12px'}}>{errors.password?.message}</p></span>
+            </div>
+
+            {/* Confirm Password
+            <div style={{ marginBottom: '8px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', color: '#7f8c8d', fontSize: '14px' }}>
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                placeholder="Confirm password"
+                style={inputStyle}
+                {...register("confirmPassword", validationSchema.confirmPasswordValidator)}
+              />
+              <span><p style={{color:"#e74c3c", fontSize: '12px'}}>{errors.confirmPassword?.message}</p></span>
+            </div> */}
+
+            {/* Contact Number */}
+            <div style={{ marginBottom: '8px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', color: '#7f8c8d', fontSize: '14px' }}>
+                Contact Number
+              </label>
+              <input
+                type="tel"
+                placeholder="Enter phone number"
+                style={inputStyle}
+                {...register("contact", validationSchema.contactValidator)}
+              />
+              <span><p style={{color:"#e74c3c", fontSize: '12px'}}>{errors.contact?.message}</p></span>
+            </div>
+
+            {/* Gender */}
+            <div style={{ marginBottom: '8px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', color: '#7f8c8d', fontSize: '14px' }}>
+                Gender
+              </label>
+              <select
+                style={inputStyle}
+                {...register("gender", validationSchema.genderValidator)}
+              >
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Others</option>
+              </select>
+              <span><p style={{color:"#e74c3c", fontSize: '12px'}}>{errors.gender?.message}</p></span>
+            </div>
+
+            
+
+            
   
             {/* User Type
             <div style={{ marginBottom: '8px' }}>

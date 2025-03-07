@@ -23,7 +23,7 @@ function App() {
       {/* Conditionally render the wrappers for proper aligment of login and signup*/}
         {
           !isAuthPage ? (
-            <body className='layout-fixed sidebar-expand-lg bg-body-tertiary sidebar-open app-loaded'>
+            <div className='layout-fixed sidebar-expand-lg bg-body-tertiary sidebar-open app-loaded'>
         <div className='app-wrapper'>
           <Routes>
             <Route path='/user' element={<UserSidebar></UserSidebar>}>
@@ -32,7 +32,7 @@ function App() {
             
           </Routes>
         </div>
-      </body>
+      </div>
           ) : (
             <Routes>
               {/* routes with centered layout */}

@@ -1,8 +1,52 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form';
 
 export const AddProperty = () => {
 
+  const [states, setStates] = useState([])
+  const [cities, setCities] = useState([])
 
+  const {register,handleSubmit} = useForm()
+
+  useEffect(() => {
+    getAllStates()
+  }, [])
+
+  const getAllStates = async () => {
+    try {
+      console.log("get all state");
+      
+      const fetchedState = await axios.get("http://localhost:4001/states/getallstates")
+      console.log(fetchedState.data.data);
+      
+      setStates(fetchedState.data.data)
+    } catch (error) {
+      console.log(error);
+      
+    }
+    
+  }
+
+  const getCityByState = async (id) => {
+    console.log("get city by state");
+      
+      console.log(id);
+      
+      const fetchedCities = await axios.get(`/city/getcitiesbystate/${id}`)
+      console.log(fetchedCities.data.data);
+      setCities(fetchedCities.data.data)
+
+    
+  }
+ 
+
+  
+
+  const submitHandler = (data) => {
+    console.log(data);
+    
+  }
 
     return (
         <div className="card card-primary card-outline mb-4">
@@ -11,17 +55,17 @@ export const AddProperty = () => {
             <div className="card-title">Add Property</div>
           </div>
           {/* Form */}
-          <form>
+          <form onSubmit={handleSubmit(submitHandler)}>
             <div className="card-body">
               {/* Basic Property Information */}
               <h5 className="mb-3">Basic Property Information</h5>
               <div className="mb-3">
                 <label htmlFor="propertyTitle" className="form-label">Property Title</label>
-                <input type="text" className="form-control" id="propertyTitle" placeholder="Enter property title" />
+                <input type="text" {...register("propertyName")} className="form-control" id="propertyTitle" placeholder="Enter property title" />
               </div>
               <div className="mb-3">
                 <label htmlFor="propertyType" className="form-label">Property Type</label>
-                <select className="form-select" id="propertyType">
+                <select className="form-select" {...register("categoryId")} id="propertyType">
                   <option value="">Select Type</option>
                   <option value="apartment">Apartment</option>
                   <option value="house">House</option>
@@ -42,7 +86,7 @@ export const AddProperty = () => {
               <div className="row mb-3">
                 <div className="col">
                   <label htmlFor="price" className="form-label">Price</label>
-                  <input type="number" className="form-control" id="price" placeholder="Enter price" />
+                  <input type="number" {...register("basePrice")} className="form-control" id="price" placeholder="Enter price" />
                 </div>
                 <div className="col">
                   <label htmlFor="negotiable" className="form-label">Negotiable</label>
@@ -58,17 +102,35 @@ export const AddProperty = () => {
               <h5 className="mb-3">Location Details</h5>
               <div className="mb-3">
                 <label htmlFor="address" className="form-label">Full Address</label>
-                <input type="text" className="form-control" id="address" placeholder="Enter full address" />
+                <input type="text" {...register("address")} className="form-control" id="address" placeholder="Enter full address" />
               </div>
               <div className="row mb-3">
                 <div className="col">
-                  <label htmlFor="city" className="form-label">City</label>
-                  <input type="text" className="form-control" id="city" placeholder="City" />
-                </div>
-                <div className="col">
                   <label htmlFor="state" className="form-label">State</label>
-                  <input type="text" className="form-control" id="state" placeholder="State" />
+                 
+                  <select className="form-select" onChange={(event) => {getCityByState(event.target.value)}} >
+                    <option value="">Select State</option>
+                    
+                  {
+                     states?.map((state , index) => {
+                      return <option key={index} value={state._id}>{state.name}</option>
+                     })
+                  }
+                  </select>
                 </div>
+                
+                <div className="col">
+                  <label htmlFor="city" className="form-label">City</label>
+                  <select className="form-select" id="city">
+                    <option value="">Select City</option>
+                    {
+                     cities?.map((city , index) => {
+                      return <option key={index} value={city._id}>{city.name}</option>
+                     })
+                  }
+                  </select>
+                </div>
+                
                 <div className="col">
                   <label htmlFor="zip" className="form-label">ZIP / Pincode</label>
                   <input type="text" className="form-control" id="zip" placeholder="ZIP or Pincode" />
@@ -193,8 +255,8 @@ export const AddProperty = () => {
                 <input type="file" className="form-control" id="videoTour" />
               </div>
               <div className="mb-3">
-                <label htmlFor="virtualTour" className="form-label">Virtual Tour Link</label>
-                <input type="url" className="form-control" id="virtualTour" placeholder="https://..." />
+                <label  className="form-label">Virtual Tour Link</label>
+                <input type="url" className="form-control"  placeholder="https://..." />
               </div>
               <div className="mb-3">
                 <label htmlFor="ownership" className="form-label">Ownership Type</label>
