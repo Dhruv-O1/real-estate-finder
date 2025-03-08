@@ -7,6 +7,7 @@ import { Signup } from './components/common/Signup'
 import { Login } from './components/common/Login'
 import { AddProperty } from './components/user/AddProperty'
 import axios from 'axios'
+import PrivateRoutes from './hooks/PrivateRoutes'
 
 function App() {
   // useLocation hook from react router dom to see current end point
@@ -26,8 +27,10 @@ function App() {
             <div className='layout-fixed sidebar-expand-lg bg-body-tertiary sidebar-open app-loaded'>
         <div className='app-wrapper'>
           <Routes>
-            <Route path='/user' element={<UserSidebar></UserSidebar>}>
-              <Route path='add-property' element={<AddProperty/>}></Route>
+            <Route element={<PrivateRoutes/>}>
+              <Route path='/user' element={<UserSidebar></UserSidebar>}>
+                <Route path='add-property' element={<AddProperty/>}></Route>
+              </Route>
             </Route>
             
           </Routes>
