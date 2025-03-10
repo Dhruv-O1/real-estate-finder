@@ -6,6 +6,7 @@ export const AddProperty = () => {
 
   const [states, setStates] = useState([])
   const [cities, setCities] = useState([])
+  const [areas, setAreas] = useState([])
 
   const {register,handleSubmit} = useForm()
 
@@ -37,6 +38,18 @@ export const AddProperty = () => {
       console.log(fetchedCities.data.data);
       setCities(fetchedCities.data.data)
 
+    
+  }
+
+  const getAreaByCity = async (id) => {
+    console.log("get area by city");
+    console.log(id);
+    
+    const fetchedAreas = await axios.get(`/area/getareabycity/${id}`)
+    console.log(fetchedAreas.data.data);
+    
+    setAreas(fetchedAreas.data.data)
+    
     
   }
  
@@ -108,7 +121,7 @@ export const AddProperty = () => {
                 <div className="col">
                   <label htmlFor="state" className="form-label">State</label>
                  
-                  <select className="form-select" onChange={(event) => {getCityByState(event.target.value)}} >
+                  <select className="form-select" onChange={(e) => {getCityByState(e.target.value)}} >
                     <option value="">Select State</option>
                     
                   {
@@ -121,7 +134,7 @@ export const AddProperty = () => {
                 
                 <div className="col">
                   <label htmlFor="city" className="form-label">City</label>
-                  <select className="form-select" id="city">
+                  <select className="form-select" id="city" onChange={(e) => {getAreaByCity(e.target.value)}}>
                     <option value="">Select City</option>
                     {
                      cities?.map((city , index) => {
@@ -132,8 +145,15 @@ export const AddProperty = () => {
                 </div>
                 
                 <div className="col">
-                  <label htmlFor="zip" className="form-label">ZIP / Pincode</label>
-                  <input type="text" className="form-control" id="zip" placeholder="ZIP or Pincode" />
+                  <label htmlFor="area" className="form-label">Area</label>
+                  <select className="form-select" id="area">
+                    <option value="">Select Area</option>
+                    {
+                      areas?.map((area) => {
+                        return <option value={area._id}>{area.name}</option>
+                      })
+                    }
+                  </select>
                 </div>
               </div>
               <div className="mb-3">
