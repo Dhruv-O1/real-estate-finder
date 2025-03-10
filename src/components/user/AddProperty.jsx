@@ -250,15 +250,8 @@ export const AddProperty = () => {
                 <label htmlFor="propertyImages" className="form-label">Upload Property Images</label>
                 <input type="file" className="form-control" id="propertyImages" multiple />
               </div>
-              <div className="mb-3">
-                <label htmlFor="videoTour" className="form-label">Upload Video Tour (Optional)</label>
-                <input type="file" className="form-control" id="videoTour" />
-              </div>
-              <div className="mb-3">
-                <label  className="form-label">Virtual Tour Link</label>
-                <input type="url" className="form-control"  placeholder="https://..." />
-              </div>
-              <div className="mb-3">
+              
+              {/* <div className="mb-3">
                 <label htmlFor="ownership" className="form-label">Ownership Type</label>
                 <select className="form-select" id="ownership">
                   <option value="">Select Ownership Type</option>
@@ -266,14 +259,14 @@ export const AddProperty = () => {
                   <option value="leasehold">Leasehold</option>
                   <option value="coop">Co-op</option>
                 </select>
-              </div>
-              <div className="mb-3">
+              </div> */}
+              {/* <div className="mb-3">
                 <label htmlFor="legalDocs" className="form-label">Legal Approvals & Documents</label>
                 <input type="file" className="form-control" id="legalDocs" multiple />
-              </div>
+              </div> */}
       
               {/* Owner/Agent Details */}
-              <h5 className="mb-3">Owner/Agent Details</h5>
+              {/* <h5 className="mb-3">Owner/Agent Details</h5>
               <div className="mb-3">
                 <label htmlFor="ownerName" className="form-label">Owner Name</label>
                 <input type="text" className="form-control" id="ownerName" placeholder="Enter owner name" />
@@ -304,10 +297,10 @@ export const AddProperty = () => {
               <div className="mb-3">
                 <label htmlFor="agencyName" className="form-label">Agency Name (if applicable)</label>
                 <input type="text" className="form-control" id="agencyName" placeholder="Enter agency name" />
-              </div>
+              </div> */}
       
               {/* Additional Information */}
-              <h5 className="mb-3">Additional Information</h5>
+              {/* <h5 className="mb-3">Additional Information</h5>
               <div className="mb-3">
                 <label htmlFor="description" className="form-label">Description</label>
                 <textarea className="form-control" id="description" rows="3" placeholder="Enter property description"></textarea>
@@ -338,7 +331,7 @@ export const AddProperty = () => {
               <div className="mb-3">
                 <label htmlFor="maintenanceCharges" className="form-label">Maintenance Charges</label>
                 <input type="number" className="form-control" id="maintenanceCharges" placeholder="Enter maintenance charges if any" />
-              </div>
+              </div> */}
             </div>
             {/* Footer */}
             <div className="card-footer">

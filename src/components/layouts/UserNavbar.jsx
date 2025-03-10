@@ -1,6 +1,7 @@
 import React from 'react'
+import hamburgermenu from "../../assets/img/hamburgermenu.png"
 
-export const UserNavbar = () => {
+export const UserNavbar = ({ toggleSidebar }) => {
   return (
     <nav className="app-header navbar navbar-expand bg-body">
   {/*begin::Container*/}
@@ -13,8 +14,15 @@ export const UserNavbar = () => {
           data-lte-toggle="sidebar"
           href="#"
           role="button"
+          style={{
+            color: "black",
+            padding: "5px 10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+          }}
+          onClick={toggleSidebar}
         >
-          <i className="bi bi-list" />
+          <img src={hamburgermenu} style={{height:"25px",width:"25px"}} />
         </a>
       </li>
       <li className="nav-item d-none d-md-block">

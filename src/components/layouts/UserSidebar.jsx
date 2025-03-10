@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { UserNavbar } from './UserNavbar'
 import { Link, Outlet } from 'react-router-dom'
 
 export const UserSidebar = () => {
+  const [isSidebarOpen, setSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    console.log("toggleSidebar");
+    setSidebarOpen(!isSidebarOpen);
+  };
   return (
     <>
-    <UserNavbar/>
-    <aside
-        className="app-sidebar bg-body-secondary shadow"
-        data-bs-theme="dark"
+    <UserNavbar toggleSidebar={toggleSidebar}/>
+      <aside
+          className={`app-sidebar bg-body-secondary shadow ${
+            isSidebarOpen ? "open" : "d-none"
+          }`}        
+          data-bs-theme="dark"
       >
         <div className="sidebar-brand">
           

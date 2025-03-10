@@ -41,6 +41,7 @@ function App() {
               {/* routes with centered layout */}
             <Route path='/signup' element={<Signup></Signup>}></Route>
             <Route path='/login' element={<Login></Login>}></Route>
+            
             </Routes>
           )
         }
