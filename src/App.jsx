@@ -8,6 +8,7 @@ import { Login } from './components/common/Login'
 import { AddProperty } from './components/user/AddProperty'
 import axios from 'axios'
 import PrivateRoutes from './hooks/PrivateRoutes'
+import { useEffect } from 'react'
 
 function App() {
   // useLocation hook from react router dom to see current end point
@@ -16,36 +17,39 @@ function App() {
   axios.defaults.baseURL = "http://localhost:4001"
 
   // checking if current route is login or signup
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup'
+  useEffect(() => {
+    if (location.pathname === "/login" || location.pathname === "/signup") {
+      document.body.className = ""; // Remove the unwanted class for login and signup
+    } else {
+      document.body.className =
+        "layout-fixed sidebar-expand-lg bg-body-tertiary sidebar-open app-loaded";
+    }
+  }, [location.pathname]);
+
+  
 
   return (
     
-      <>
-      {/* Conditionally render the wrappers for proper aligment of login and signup*/}
-        {
-          !isAuthPage ? (
-            <div className='layout-fixed sidebar-expand-lg bg-body-tertiary sidebar-open app-loaded'>
-        <div className='app-wrapper'>
-          <Routes>
-            <Route element={<PrivateRoutes/>}>
-              <Route path='/user' element={<UserSidebar></UserSidebar>}>
-                <Route path='add-property' element={<AddProperty/>}></Route>
-              </Route>
-            </Route>
-            
-          </Routes>
-        </div>
-      </div>
-          ) : (
-            <Routes>
-              {/* routes with centered layout */}
-            <Route path='/signup' element={<Signup></Signup>}></Route>
-            <Route path='/login' element={<Login></Login>}></Route>
-            
-            </Routes>
-          )
-        }
-      </>
+    <div
+    className={
+      location.pathname === "/login" || location.pathname === "/signup"
+        ? ""
+        : "app-wrapper"
+    }
+  >
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      {/* <Route path="/" element ={<LandingPage/>}></Route> */}
+
+      <Route path="" element={<PrivateRoutes />}>
+        <Route path="/user" element={<UserSidebar />}>
+          <Route path="add-property" element={<AddProperty />} />
+        </Route>
+        
+      </Route>
+    </Routes>
+  </div>
     
   )
 }
