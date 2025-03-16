@@ -1,24 +1,27 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { data } from 'react-router-dom';
 
 export const AddProperty = () => {
 
   const [states, setStates] = useState([])
   const [cities, setCities] = useState([])
   const [areas, setAreas] = useState([])
+  const [categories,setCategories] = useState([])
 
   const {register,handleSubmit} = useForm()
 
   useEffect(() => {
     getAllStates()
+    getAllCategories()
   }, [])
 
   const getAllStates = async () => {
     try {
       console.log("get all state");
       
-      const fetchedState = await axios.get("http://localhost:4001/states/getallstates")
+      const fetchedState = await axios.get("states/getallstates")
       console.log(fetchedState.data.data);
       
       setStates(fetchedState.data.data)
@@ -26,8 +29,22 @@ export const AddProperty = () => {
       console.log(error);
       
     }
-    
   }
+  const getAllCategories = async () => {
+    try {
+      console.log("get all category");
+      
+      const fetchedCategories = await axios.get("/category/get")
+      console.log(fetchedCategories.data.data);
+      
+      setCategories(fetchedCategories.data.data)
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+    
+  
 
   const getCityByState = async (id) => {
     console.log("get city by state");
@@ -52,12 +69,46 @@ export const AddProperty = () => {
     
     
   }
+
+
  
 
   
 
-  const submitHandler = (data) => {
+  const submitHandler = async (data) => {
+    const userId = localStorage.getItem("id")
     console.log(data);
+    data.userId = userId
+    console.log(data.propertyImage[0]);
+
+    
+    
+    const formData = new FormData();
+    formData.append("propertyName",data.propertyName)
+    formData.append("categoryId",data.categoryId)
+    formData.append("basePrice",data.basePrice)
+    formData.append("address",data.address)
+    formData.append("stateId",data.stateId)
+    formData.append("cityId",data.cityId)
+    formData.append("areaId",data.areaId)
+    formData.append("nearbyLandmark",data.nearbyLandmark)
+    formData.append("googleMapLink",data.googleMapLink)
+    formData.append("userId",data.userId)
+    formData.append("builtUpArea",data.builtUpArea)
+    formData.append("carpetArea",data.carpetArea)
+    formData.append("bedrooms",data.bedrooms)
+    formData.append("balconies",data.balconies)
+    formData.append("furnishingStatus",data.furnishingStatus)
+    formData.append("propertyAge",data.propertyAge)
+    formData.append("facingDirection",data.facingDirection)
+    formData.append("parkingSlot",data.parkingSlot)
+    formData.append("propertyImage",data.propertyImage[0])
+    console.log(formData);
+    
+    
+
+    const res = await axios.post("/property/addWithFile",formData)
+    console.log(res.data);
     
   }
 
@@ -77,17 +128,17 @@ export const AddProperty = () => {
                 <input type="text" {...register("propertyName")} className="form-control" id="propertyTitle" placeholder="Enter property title" />
               </div>
               <div className="mb-3">
-                <label htmlFor="propertyType" className="form-label">Property Type</label>
-                <select className="form-select" {...register("categoryId")} id="propertyType">
+                <label htmlFor="propertyType" className="form-label" >Property Type</label>
+                <select className="form-select"  id="propertyType" {...register("categoryId")}>
                   <option value="">Select Type</option>
-                  <option value="apartment">Apartment</option>
-                  <option value="house">House</option>
-                  <option value="villa">Villa</option>
-                  <option value="commercial">Commercial</option>
-                  <option value="plot">Plot</option>
+                  {
+                    categories.map((category) => {
+                      return <option value={category._id}>{category.categoryName}</option>
+                    })
+                  }
                 </select>
               </div>
-              <div className="mb-3">
+              {/* <div className="mb-3">
                 <label htmlFor="listingType" className="form-label">Listing Type</label>
                 <select className="form-select" id="listingType">
                   <option value="">Select Listing Type</option>
@@ -95,7 +146,7 @@ export const AddProperty = () => {
                   <option value="rent">For Rent</option>
                   <option value="lease">Lease</option>
                 </select>
-              </div>
+              </div> */}
               <div className="row mb-3">
                 <div className="col">
                   <label htmlFor="price" className="form-label">Price</label>
@@ -121,11 +172,12 @@ export const AddProperty = () => {
                 <div className="col">
                   <label htmlFor="state" className="form-label">State</label>
                  
-                  <select className="form-select" onChange={(e) => {getCityByState(e.target.value)}} >
+                  <select className="form-select" {...register("stateId")} onChange={(e) => {getCityByState(e.target.value)}} >
                     <option value="">Select State</option>
                     
                   {
                      states?.map((state , index) => {
+
                       return <option key={index} value={state._id}>{state.name}</option>
                      })
                   }
@@ -134,7 +186,7 @@ export const AddProperty = () => {
                 
                 <div className="col">
                   <label htmlFor="city" className="form-label">City</label>
-                  <select className="form-select" id="city" onChange={(e) => {getAreaByCity(e.target.value)}}>
+                  <select className="form-select" id="city" {...register("cityId")} onChange={(e) => {getAreaByCity(e.target.value)}}>
                     <option value="">Select City</option>
                     {
                      cities?.map((city , index) => {
@@ -146,7 +198,7 @@ export const AddProperty = () => {
                 
                 <div className="col">
                   <label htmlFor="area" className="form-label">Area</label>
-                  <select className="form-select" id="area">
+                  <select className="form-select" {...register("areaId")} id="area">
                     <option value="">Select Area</option>
                     {
                       areas?.map((area) => {
@@ -158,11 +210,11 @@ export const AddProperty = () => {
               </div>
               <div className="mb-3">
                 <label htmlFor="landmarks" className="form-label">Nearby Landmarks</label>
-                <input type="text" className="form-control" id="landmarks" placeholder="E.g., school, hospital" />
+                <input type="text" {...register("nearbyLandmark")} className="form-control" id="landmarks" placeholder="E.g., school, hospital" />
               </div>
               <div className="mb-3">
                 <label htmlFor="mapsLink" className="form-label">Google Maps Link</label>
-                <input type="url" className="form-control" id="mapsLink" placeholder="https://maps.google.com/..." />
+                <input type="url" {...register("googleMapLink")} className="form-control" id="mapsLink" placeholder="https://maps.google.com/..." />
               </div>
       
               {/* Property Specifications */}
@@ -170,53 +222,53 @@ export const AddProperty = () => {
               <div className="row mb-3">
                 <div className="col">
                   <label htmlFor="builtUpArea" className="form-label">Built-up Area</label>
-                  <input type="number" className="form-control" id="builtUpArea" placeholder="Enter built-up area" />
+                  <input type="number" {...register("builtUpArea")} className="form-control" id="builtUpArea" placeholder="Enter built-up area" />
                 </div>
                 <div className="col">
                   <label htmlFor="carpetArea" className="form-label">Carpet Area</label>
-                  <input type="number" className="form-control" id="carpetArea" placeholder="Enter carpet area" />
+                  <input type="number" {...register("carpetArea")} className="form-control" id="carpetArea" placeholder="Enter carpet area" />
                 </div>
               </div>
               <div className="row mb-3">
                 <div className="col">
                   <label htmlFor="bedrooms" className="form-label">Bedrooms</label>
-                  <input type="number" className="form-control" id="bedrooms" placeholder="No. of bedrooms" />
+                  <input type="number" className="form-control" id="bedrooms" {...register("bedrooms")}  placeholder="No. of bedrooms" />
                 </div>
                 <div className="col">
-                  <label htmlFor="bathrooms" className="form-label">Bathrooms</label>
-                  <input type="number" className="form-control" id="bathrooms" placeholder="No. of bathrooms" />
+                  <label htmlFor="bathrooms" className="form-label" >Bathrooms</label>
+                  <input type="number" className="form-control" id="bathrooms" {...register("bathrooms")} placeholder="No. of bathrooms" />
                 </div>
                 <div className="col">
                   <label htmlFor="balconies" className="form-label">Balconies</label>
-                  <input type="number" className="form-control" id="balconies" placeholder="No. of balconies" />
+                  <input type="number" className="form-control" id="balconies" {...register("balconies")} placeholder="No. of balconies" />
                 </div>
               </div>
               <div className="mb-3">
                 <label htmlFor="furnishing" className="form-label">Furnishing Status</label>
-                <select className="form-select" id="furnishing">
+                <select className="form-select" id="furnishing" {...register("furnishingStatus")} >
                   <option value="">Select Status</option>
-                  <option value="fully">Fully Furnished</option>
-                  <option value="semi">Semi-Furnished</option>
-                  <option value="unfurnished">Unfurnished</option>
+                  <option value="Furnished">Fully Furnished</option>
+                  <option value="Semi-Furnished">Semi-Furnished</option>
+                  <option value="Unfurnished">Unfurnished</option>
                 </select>
               </div>
               <div className="row mb-3">
                 <div className="col">
                   <label htmlFor="age" className="form-label">Age of Property (Years)</label>
-                  <input type="number" className="form-control" id="age" placeholder="Years" />
+                  <input type="number" {...register("propertyAge")} className="form-control" id="age" placeholder="Years" />
                 </div>
-                <div className="col">
+                {/* <div className="col">
                   <label htmlFor="floorNo" className="form-label">Floor Number</label>
                   <input type="number" className="form-control" id="floorNo" placeholder="Floor number" />
                 </div>
                 <div className="col">
                   <label htmlFor="totalFloors" className="form-label">Total Floors</label>
                   <input type="number" className="form-control" id="totalFloors" placeholder="Total floors in building" />
-                </div>
+                </div> */}
               </div>
               <div className="mb-3">
                 <label htmlFor="facing" className="form-label">Facing Direction</label>
-                <select className="form-select" id="facing">
+                <select className="form-select" id="facing" {...register("facingDirection")}>
                   <option value="">Select Direction</option>
                   <option value="north">North</option>
                   <option value="south">South</option>
@@ -225,12 +277,12 @@ export const AddProperty = () => {
                 </select>
               </div>
               <div className="mb-3">
-                <label htmlFor="parking" className="form-label">Parking Availability (Slots)</label>
-                <input type="number" className="form-control" id="parking" placeholder="Number of parking slots" />
+                <label className="form-label">Parking Availability (Slots)</label>
+                <input type="number" className="form-control"  {...register("parkingSlot")} placeholder="Number of parking slots" />
               </div>
       
               {/* Amenities & Features */}
-              <h5 className="mb-3">Amenities & Features</h5>
+              {/* <h5 className="mb-3">Amenities & Features</h5>
               <div className="form-check mb-2">
                 <input className="form-check-input" type="checkbox" id="lift" />
                 <label className="form-check-label" htmlFor="lift">Lift/Elevator</label>
@@ -262,13 +314,13 @@ export const AddProperty = () => {
               <div className="form-check mb-2">
                 <input className="form-check-input" type="checkbox" id="clubhouse" />
                 <label className="form-check-label" htmlFor="clubhouse">Clubhouse/Community Hall</label>
-              </div>
+              </div> */}
       
               {/* Property Media & Documents */}
               <h5 className="mb-3">Property Media & Documents</h5>
               <div className="mb-3">
                 <label htmlFor="propertyImages" className="form-label">Upload Property Images</label>
-                <input type="file" className="form-control" id="propertyImages" multiple />
+                <input type="file" className="form-control" id="propertyImages" multiple {...register("propertyImage")} />
               </div>
               
               {/* <div className="mb-3">
