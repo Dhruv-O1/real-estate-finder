@@ -105,8 +105,6 @@ export const AddProperty = () => {
     formData.append("propertyImage",data.propertyImage[0])
     console.log(formData);
     
-    
-
     const res = await axios.post("/property/addWithFile",formData)
     console.log(res.data);
     
