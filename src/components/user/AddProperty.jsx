@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { data } from 'react-router-dom';
 
+// import '../../assets/css/adminlte.css'
+// import '../../assets/css/adminlte.min.css'
+
 export const AddProperty = () => {
 
   const [states, setStates] = useState([])
@@ -10,7 +13,7 @@ export const AddProperty = () => {
   const [areas, setAreas] = useState([])
   const [categories,setCategories] = useState([])
 
-  const {register,handleSubmit} = useForm()
+  const{register,handleSubmit} = useForm()
 
   useEffect(() => {
     getAllStates()
@@ -30,19 +33,8 @@ export const AddProperty = () => {
       
     }
   }
-  const getAllCategories = async () => {
-    try {
-      console.log("get all category");
-      
-      const fetchedCategories = await axios.get("/category/get")
-      console.log(fetchedCategories.data.data);
-      
-      setCategories(fetchedCategories.data.data)
-    } catch (error) {
-      console.log(error);
-      
-    }
-  }
+  
+  
     
   
 
@@ -68,6 +60,20 @@ export const AddProperty = () => {
     setAreas(fetchedAreas.data.data)
     
     
+  }
+
+  const getAllCategories = async () => {
+    try {
+      console.log("get all category");
+      
+      const fetchedCategories = await axios.get("/category/get")
+      console.log(fetchedCategories.data.data);
+      
+      setCategories(fetchedCategories.data.data)
+    } catch (error) {
+      console.log(error);
+      
+    }
   }
 
 
@@ -97,6 +103,7 @@ export const AddProperty = () => {
     formData.append("builtUpArea",data.builtUpArea)
     formData.append("carpetArea",data.carpetArea)
     formData.append("bedrooms",data.bedrooms)
+    formData.append("bathrooms",data.bathrooms)
     formData.append("balconies",data.balconies)
     formData.append("furnishingStatus",data.furnishingStatus)
     formData.append("propertyAge",data.propertyAge)
@@ -411,4 +418,4 @@ export const AddProperty = () => {
         </div>
       );
       
-}
+    }

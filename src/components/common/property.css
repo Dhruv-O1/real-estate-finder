@@ -1,0 +1,12 @@
+select.form-control {
+    min-width: 250px; /* Minimum width to display placeholder */
+    max-width: 100%; /* Responsive constraint */
+  }
+  
+  /* For Firefox */
+  @-moz-document url-prefix() {
+    select.form-control {
+      text-indent: 0.01px; /* Fix text alignment */
+      text-overflow: '';
+    }
+  }

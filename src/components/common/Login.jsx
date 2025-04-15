@@ -39,7 +39,7 @@ export const Login = () => {
 
           });
           setTimeout(() => {
-            navigate("/user")
+            navigate("/")
           }, 4000);
       }
     }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { UserNavbar } from './UserNavbar'
 import { Link, Outlet } from 'react-router-dom'
+// import '../../assets/css/adminlte.css'
+// import '../../assets/css/adminlte.min.css'
 
 export const UserSidebar = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -96,6 +98,12 @@ export const UserSidebar = () => {
                 <Link to='/user/add-property' className="nav-link">
                   <i className="nav-icon bi bi-palette" />
                   <p>Add Property</p>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to='/user/inquiry' className="nav-link">
+                  <i className="nav-icon bi bi-palette" />
+                  <p>Inquiry</p>
                 </Link>
               </li>
               <li className="nav-item">
