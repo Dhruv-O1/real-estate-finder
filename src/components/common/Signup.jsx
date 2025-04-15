@@ -196,7 +196,7 @@ export const Signup = () => {
             left: 0,
             width: '100%',
             height: '100%',
-            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(52, 152, 219, 0.7))'
+            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 85, 85, 0.7))'
           }}></div>
           
           {/* Logo */}

@@ -125,7 +125,7 @@ export const Login = () => {
             left: 0,
             width: '100%',
             height: '100%',
-            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(52, 152, 219, 0.7))'
+            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 85, 85, 0.7))'
           }}></div>
           
           {/* Logo */}
@@ -198,11 +198,15 @@ export const Login = () => {
             </div>
   
             <div style={{ textAlign: 'right', marginBottom: '20px' }}>
-              <Link to="/forgot-password" style={{
-                color: '#3498db',
-                textDecoration: 'none',
-                fontSize: '14px'
-              }}>
+            <Link to="/forgotpassword"
+            style={{
+              color: "#005555",
+              fontSize: "14px",
+              cursor: "pointer",
+              textDecoration: "none",
+            }}
+            
+          >
                 Forgot Password?
               </Link>
             </div>
@@ -214,7 +218,7 @@ export const Login = () => {
                 padding: '12px',
                 border: 'none',
                 borderRadius: '6px',
-                backgroundColor: '#3498db',
+                backgroundColor: '#005555',
                 color: 'white',
                 fontSize: '16px',
                 fontWeight: '600',
@@ -225,17 +229,17 @@ export const Login = () => {
             >
               Login
             </button>
-          </form>
+     </form>
   
-          <div style={{
-            textAlign: 'center',
-            marginTop: '20px',
-            color: '#7f8c8d',
-            fontSize: '14px'
-          }}>
-            <p>Don't have an account?{' '}
-              <Link to="/signup" style={{
-                color: '#3498db',
+           <div style={{
+             textAlign: 'center',
+             marginTop: '20px',
+             color: '#7f8c8d',
+             fontSize: '14px'
+           }}>
+             <p>Don't have an account?{' '}
+               <Link to="/signup" style={{
+                color: '#005555',
                 textDecoration: 'none',
                 fontWeight: '600'
               }}>
@@ -248,3 +252,5 @@ export const Login = () => {
     </div>
   );
 };
+
+

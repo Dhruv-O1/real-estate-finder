@@ -22,6 +22,8 @@ import { useEffect } from 'react'
 import {  InquiryForm } from './components/user/InquiryForm'
 import { PropertyInquiry } from './components/common/PropertyInquiry'
 import { Favourite } from './components/common/Favourite'
+import { ForgotPassword } from './components/common/ForgotPassword'
+import { ResetPassword } from './components/common/ResetPassword'
 
 
 
@@ -57,6 +59,8 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/forgotpassword" element={<ForgotPassword />} />
+      <Route path="/resetpassword/:token" element ={<ResetPassword/>}></Route>
       {/* <Route path="/" element={<LandingPage/>} /> Yogeshwari Landing page  */}
 
       {/* Template integration */}
