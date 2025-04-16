@@ -116,7 +116,7 @@ export const ContactUs = () => {
         <div
           className="col-lg-8 aos-init aos-animate"
           data-aos="fade-up"
-          data-aos-delay={200}
+            data-aos-delay="200"
         >
           <form action="#">
             <div className="row">

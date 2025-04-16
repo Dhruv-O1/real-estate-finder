@@ -35,15 +35,16 @@ export const Properties = () => {
           offset: 120
         });
         getAllStates()
+        getAllProperties()
       }, []);
 
       
 
 
-        useEffect(() => {
-          getAllStates()
-          getAllProperties()
-        }, [])
+        // useEffect(() => {
+        //   getAllStates()
+        //   getAllProperties()
+        // }, [])
       
         const getAllStates = async () => {
           try {

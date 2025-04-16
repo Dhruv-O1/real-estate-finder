@@ -93,7 +93,7 @@ export const PropertyInquiry = () => {
   const{register,handleSubmit}=useForm()
 
    const submitHandler=async (data)=>{
-    data.propertyId = propertyId;
+    // data.propertyId = propertyId;
     console.log(data)
 
     const res = await axios.post("http://localhost:4001/inquiry/add",data)
@@ -159,17 +159,43 @@ export const PropertyInquiry = () => {
           <div className="col-lg-110">
                     <h2 className="heading text-primary">{property.address}</h2>
                     <p className="meta">{property?.areaId?.name}, {property?.cityId?.name}, {property?.stateId?.name}.</p>
-                    <p className="text-black-50">
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione
-                      laborum quo quos omnis sed magnam id, ducimus saepe, debitis error
-                      earum, iste dicta odio est sint dolorem magni animi tenetur.
-                    </p>
-                    <p className="text-black-50">
-                      Perferendis eligendi reprehenderit, assumenda molestias nisi eius
-                      iste reiciendis porro tenetur in, repudiandae amet libero.
-                      Doloremque, reprehenderit cupiditate error laudantium qui, esse quam
-                      debitis, eum cumque perferendis, illum harum expedita.
-                    </p>
+                    <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 10px" }}>
+  <tbody>
+    <tr>
+      <td><i className="fa fa-tag" style={{ color: "#333", marginRight: "8px" }}></i><strong>Price:₹</strong> {property.basePrice}</td>
+      <td><i className="fa fa-map-marker" style={{ color: "#333", marginRight: "8px" }}></i><strong>Nearby Landmark:</strong> {property.nearbyLandmark}</td>
+    </tr>
+    <tr>
+      <td><i className="fa fa-expand" style={{ color: "#333", marginRight: "8px" }}></i><strong>Built Up Area:</strong> {property.builtUpArea}</td>
+      <td><i className="fa fa-compress" style={{ color: "#333", marginRight: "8px" }}></i><strong>Carpet Area:</strong> {property.carpetArea}</td>
+    </tr>
+    <tr>
+      <td><i className="fa fa-bed" style={{ color: "#333", marginRight: "8px" }}></i><strong>Bedrooms:</strong> {property.bedrooms}</td>
+      <td><i className="fa fa-bath" style={{ color: "#333", marginRight: "8px" }}></i><strong>Bathrooms:</strong> {property.bathrooms}</td>
+    </tr>
+    <tr>
+      <td><i className="fa fa-sun-o" style={{ color: "#333", marginRight: "8px" }}></i><strong>Balconies:</strong> {property.balconies}</td>
+      <td><i className="fa fa-car" style={{ color: "#333", marginRight: "8px" }}></i><strong>Parking Slot:</strong> {property.parkingSlot}</td>
+      
+    </tr>
+    <tr>
+      <td><i className="fa fa-hourglass-half" style={{ color: "#333", marginRight: "8px" }}></i><strong>Property Age:</strong> {property.propertyAge}</td>
+      <td><i className="fa fa-compass" style={{ color: "#333", marginRight: "8px" }}></i><strong>Facing Direction:</strong> {property.facingDirection}</td>
+    </tr>
+    <tr>
+    
+  <td style={{ color: "#333", margin: 0 }}>
+    <i className="fas fa-couch" style={{ color: "#333", marginRight: "8px" }}></i>
+    <strong style={{ color: "#333" }}>Furnishing Status:</strong> {property.furnishingStatus} – A thoughtfully designed space for cozy living.
+  </td>
+
+</tr>
+
+
+
+   
+  </tbody>
+</table>
                     
           
           
@@ -213,113 +239,48 @@ export const PropertyInquiry = () => {
           data-aos="fade-up"
           data-aos-delay={200}
         >
+         
           <form onSubmit={handleSubmit(submitHandler)}>
-          <div className="card-body">
-          <div className="mb-3">
-          <div className="mb-3">
-                <label htmlFor="fullname" className="form-label">Full Name</label>
-                <input type="text" {...register("fullName")} className="form-control" id="fullname" placeholder="Enter Full name" />
+            <div className="row">
+              <div className="col-6 mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Your Name"
+                  fdprocessedid="r8r3k7"
+                  {...register("fullName")}
+                />
               </div>
-                <label htmlFor="email" className="form-label">Email</label>
-                <input type="text" {...register("email")} className="form-control" id="email" placeholder="Enter email" />
+              <div className="col-6 mb-3">
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Your Email"
+                  fdprocessedid="7a9s7j"
+                  {...register("email")}
+                />
               </div>
-              <div className="mb-3">
-                <label htmlFor="phone number" className="form-label">Phone Number</label>
-                <input type="text" {...register("phoneNumber")} className="form-control" id="phone number" placeholder="Enter phone number" />
+              <div className="col-12 mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Contact Number"
+                  fdprocessedid="sjdoo"
+                  {...register("phoneNumber")}
+                />
               </div>
-              <div className="mb-3">
-                <label htmlFor="propertyType" className="form-label" >Property Type</label>
-                <select className="form-select"  id="propertyType" {...register("categoryId")}>
-                  <option value="">Select Type</option>
-                  {
-                    categories.map((category) => {
-                      return <option value={category._id}>{category.categoryName}</option>
-                    })
-                  }
-                </select>
+              <div className="col-12 mb-3">
+                <textarea
+                  name=""
+                  id=""
+                  cols={30}
+                  rows={7}
+                  className="form-control"
+                  placeholder="Message"
+                  defaultValue={""}
+                  {...register("message")}
+                />
               </div>
-            
-              <h5 className="mb-3">Location Details</h5>
-              <div className="mb-3">
-                <label htmlFor="address" className="form-label">Full Address</label>
-                <input type="text" {...register("address")} className="form-control" id="address" placeholder="Enter full address" />
-              </div>
-              <div className="row mb-3">
-                <div className="col">
-                  <label htmlFor="state" className="form-label">State</label>
-                 
-                  <select className="form-select" {...register("stateId")} onChange={(e) => {getCityByState(e.target.value)}} >
-                    <option value="">Select State</option>
-                    
-                  {
-                     states?.map((state , index) => {
-
-                      return <option key={index} value={state._id}> {state.name} </option>
-                     })
-                  }
-                  </select>
-                </div>
-                
-                <div className="col">
-                  <label htmlFor="city" className="form-label">City</label>
-                  <select className="form-select" id="city" {...register("cityId")} onChange={(e) => {getAreaByCity(e.target.value)}}>
-                    <option value="">Select City</option>
-                    {
-                     cities?.map((city , index) => {
-                      return <option key={index} value={city._id}>{city.name}</option>
-                     })
-                  }
-                  </select>
-                </div>
-                
-                <div className="col">
-                  <label htmlFor="area" className="form-label">Area</label>
-                  <select className="form-select" {...register("areaId")} id="area">
-                    <option value="">Select Area</option>
-                    {
-                      areas?.map((area) => {
-                        return <option value={area._id}>{area.name}</option>
-                      })
-                    }
-                  </select>
-                </div>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="budget" className="form-label">Budget</label>
-                <input type="text" {...register("budget")} className="form-control" id="budget" placeholder="Enter  your budget" />
-              </div>
-              <div className="row mb-3">
-                <div className="col">
-                  <label htmlFor="bedrooms" className="form-label">Bedrooms</label>
-                  <input type="number" className="form-control" id="bedrooms" {...register("bedrooms")}  placeholder="No. of bedrooms" />
-                </div>
-                <div className="col">
-                  <label htmlFor="bathrooms" className="form-label" >Bathrooms</label>
-                  <input type="number" className="form-control" id="bathrooms" {...register("bathrooms")} placeholder="No. of bathrooms" />
-                </div>
-                <div className="col">
-                  <label htmlFor="balconies" className="form-label">Balconies</label>
-                  <input type="number" className="form-control" id="balconies" {...register("balconies")} placeholder="No. of balconies" />
-                </div>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="furnishing" className="form-label">Furnishing Status</label>
-                <select className="form-select" id="furnishing" {...register("furnishingStatus")} >
-                  <option value="">Select Status</option>
-                  <option value="Furnished">Fully Furnished</option>
-                  <option value="Semi-Furnished">Semi-Furnished</option>
-                  <option value="Unfurnished">Unfurnished</option>
-                </select>
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Parking Availability (Slots)</label>
-                <input type="number" className="form-control"  {...register("parkingSlot")} placeholder="Number of parking slots" />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Message</label>
-                <input type="text" className="form-control"  {...register("message")} placeholder="enter message" />
-              </div>
-              
               <div className="col-12">
                 <input
                   type="submit"
@@ -328,8 +289,7 @@ export const PropertyInquiry = () => {
                   fdprocessedid="h5w4fn"
                 />
               </div>
-            
-          </div>
+            </div>
           </form>
         </div>
       </div>

@@ -263,7 +263,7 @@ export const PropertSingle = () => {
           
           <p style={{ color: "#333" }}>
   <i className="fa fa-home" style={{ color: "#2c3e50", marginRight: "8px" }}></i>
-  Discover modern living in this beautifully designed apartment.  
+  Discover modern living in this beautifully designed property.  
   Spacious interiors, smart amenities, and a prime location.  
   Perfect for those who crave comfort and convenience.  
   Enjoy a secure, vibrant community and a lifestyle of ease.  
