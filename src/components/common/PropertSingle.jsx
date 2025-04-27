@@ -15,6 +15,7 @@ import 'tiny-slider/dist/tiny-slider.css';
 import AOS from 'aos';
 import { Footer } from './Footer';
 import heroBg3 from '../../landing/assets/img/hero_bg_3.jpg';
+import agent from '../../landing/assets/img/person_5-min.jpg';
 import img2 from '../../landing/assets/img/img_2.jpg';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -293,7 +294,7 @@ export const PropertSingle = () => {
           <div className="d-block agent-box p-5">
             <div className="img mb-4">
               <img
-                src="images/person_2-min.jpg"
+                src={agent}
                 alt="Image"
                 className="img-fluid"
               />

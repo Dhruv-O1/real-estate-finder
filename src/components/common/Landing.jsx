@@ -69,8 +69,7 @@ export const Landing = () => {
           <span className="flaticon-house" />
           <h3 className="mb-3">Our Properties</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Voluptates, accusamus.
+          Explore our curated portfolio of premium properties, from modern urban apartments to serene countryside estates. Discover your dream space with trusted guidance and transparent processes.
           </p>
           <p>
             <a href="#" className="learn-more">
@@ -90,8 +89,7 @@ export const Landing = () => {
           <span className="flaticon-building" />
           <h3 className="mb-3">Property for Sale</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Voluptates, accusamus.
+          Browse exclusive listings of residential and commercial properties. Whether you seek a luxury villa, a downtown office, or an investment opportunity, we match your vision to the perfect location.
           </p>
           <p>
             <a href="#" className="learn-more">
@@ -111,8 +109,7 @@ export const Landing = () => {
           <span className="flaticon-house-3" />
           <h3 className="mb-3">Real Estate Agent</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Voluptates, accusamus.
+          Meet our certified agents with 10+ years of local market expertise. From valuation to closing, we simplify buying, selling, or renting with personalized strategies and 24/7 support.
           </p>
           <p>
             <a href="#" className="learn-more">
@@ -132,8 +129,7 @@ export const Landing = () => {
           <span className="flaticon-house-1" />
           <h3 className="mb-3">House for Sale</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Voluptates, accusamus.
+          Find move-in-ready homes, fixer-uppers, or custom-built designs. Filter by price, neighborhood, or amenities like pools, smart tech, or eco-friendly features.
           </p>
           <p>
             <a href="#" className="learn-more">

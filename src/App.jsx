@@ -24,6 +24,9 @@ import { PropertyInquiry } from './components/common/PropertyInquiry'
 import { Favourite } from './components/common/Favourite'
 import { ForgotPassword } from './components/common/ForgotPassword'
 import { ResetPassword } from './components/common/ResetPassword'
+import { AllUser } from './components/admin/AllUser'
+import { AllProperty } from './components/admin/AllProperty'
+import { AllInquiry } from './components/admin/AllInquiry'
 
 
 
@@ -66,16 +69,21 @@ function App() {
       {/* Template integration */}
 
       <Route path='/' element={<Landing/>}/>
-      <Route path='/singleproperty/:propertyid' element={<PropertSingle/>}></Route>
-      <Route path='/inquiry/:propertyid' element={<PropertyInquiry/>}></Route>
       <Route path='/services' element={<Services/>}></Route>
       <Route path='/about' element={<About/>}></Route>
       <Route path='/contactus' element={<ContactUs/>}></Route>
       <Route path='/properties' element={<Properties/>}></Route>
-      <Route path='/favouriteprop' element={<Favourite/>}>
-        
+      <Route path='/favouriteprop' element={<Favourite/>}> 
       </Route>
-      <Route path="/add-property" element={<AddProperty />} />
+      
+
+
+
+      <Route path='/admin' >
+          <Route path='alluser' element={<AllUser/>}></Route>
+          <Route path='allproperty' element={<AllProperty/>}></Route>
+          <Route path='allinquiry' element={<AllInquiry/>}></Route>
+       </Route>
       
 
 
@@ -84,8 +92,15 @@ function App() {
         <Route path="/user" element={<UserSidebar />}>
           <Route path="add-property" element={<AddProperty />} />
           <Route path="inquiry" element={< InquiryForm/>} />
-
         </Route>
+
+
+        <Route path="/add-property" element={<AddProperty />} />
+        <Route path='/singleproperty/:propertyid' element={<PropertSingle/>}></Route>
+        <Route path='/inquiry/:propertyid' element={<PropertyInquiry/>}></Route>
+
+
+        
         
       </Route>
     </Routes>
