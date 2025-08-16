@@ -20,12 +20,12 @@ import person6 from '../../landing/assets/img/person_6-min.jpg';
 
 
 // import 'icofont/icofont.min.css';
-import { Navbar } from './Navbar';
-import { Hero } from './Hero';
-import { PopularProperty } from './PopularProperty';
-import { Testimonials } from './Testimonials';
-import CounterSection from './CounterSection';
-import { Footer } from './Footer';
+import { Navbar } from '../../components/common/Navbar';
+import { Hero } from '../../components/common/Hero';
+import { PopularProperty } from '../../components/common/PopularProperty';
+import { Testimonials } from '../../components/common/Testimonials';
+import CounterSection from '../../components/common/CounterSection';
+import { Footer } from '../../components/common/Footer';
 
 export const Landing = () => {
 

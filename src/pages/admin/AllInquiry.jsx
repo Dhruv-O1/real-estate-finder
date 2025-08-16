@@ -12,12 +12,13 @@ import 'aos/dist/aos.css';
 import 'tiny-slider/dist/tiny-slider.css';
 import AOS from 'aos';
 import axios from 'axios';
-import { AdminNavbar } from './AdminNavbar';
-import { Bounce, toast } from 'react-toastify';
+import { AdminNavbar } from '../../components/admin/AdminNavbar';
 
 
-export const AllUser = () => {
-    const [user, setuser] = useState([])
+export const AllInquiry = () => {
+
+    const [inquiry, setinquiry] = useState([])
+    
 
     useEffect(() => {
         AOS.init({
@@ -26,41 +27,16 @@ export const AllUser = () => {
           once: true,
           offset: 120
         });
-        getAllUsers()
+        getAllInquiry()
       }, []);
 
-      const getAllUsers = async () => {
-        const res = await axios.get("/user")
+      const getAllInquiry = async () => {
+        const res = await axios.get("/inquiry/get")
         console.log(res.data.data);
-        setuser(res.data.data)
+        setinquiry(res.data.data)
 
         
       }
-
-
-      const deleteUser = async (id) => {
-        const res = await axios.delete(`/user/${id}`)
-        console.log(res);
-        if (res.status == 204) {
-          toast.success('🦄 User deleted Succesfully', {
-            position: "top-left",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Bounce,
-            });
-        }
-        getAllUsers()
-         
-        
-        
-      }
-
-
   return (
     <div>
         <AdminNavbar/>
@@ -72,7 +48,7 @@ export const AllUser = () => {
                   <div className="row justify-content-center align-items-center">
                     <div className="col-lg-9 text-center mt-5">
                       <h1 className="heading" data-aos="fade-up" data-aos-delay="200">
-                        All Users
+                        All Inquiry
                       </h1>
                       
                     </div>
@@ -85,33 +61,28 @@ export const AllUser = () => {
                 <thead>
                     <tr>
                         <td>ID</td>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
+                        <th>Fullname</th>
                         <th>Email</th>
-                        <th>Phone No.</th>
-                        <th>Gender</th>
-                        <th>Delete</th>
-                        
+                        <th>Phone Number</th>
+                        <th>Message</th>
+                     
                         
                     </tr>
                 </thead>
                 <tbody>
-                {user?.map((user)=>{
+                {inquiry?.map((inquiry)=>{
                     return(
                         <tr>
-                            <td>{user._id}</td>
-                            <td>{user.firstName}</td>
-                            <td>{user.lastName}</td>
-                            <td>{user.email}</td>
-                            <td>{user.contact}</td>
-                            <td>{user.gender}</td>
-                            <td><button onClick={() => {deleteUser(user._id)}}  className='btn btn-danger '>Delete</button></td>
+                            <td>{inquiry._id}</td>
+                            <td>{inquiry.fullName}</td>
                             
+                            <td>{inquiry.email}</td>
+                            <td>{inquiry.phoneNumber}</td>
+                            <td>{inquiry.message}</td>
                             
                         </tr>
                     )
                 })}
-
                 </tbody>
 
             </table>
