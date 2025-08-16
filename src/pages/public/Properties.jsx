@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Navbar } from './Navbar'
+import { Navbar } from '../../components/common/Navbar'
 import '../../landing/assets/fonts/icommon/style.css';
 import '../../landing/assets/fonts/flaticon/flaticon.css';
 import '../../landing/css/tiny-slider.css';
@@ -15,8 +15,8 @@ import 'tiny-slider/dist/tiny-slider.css';
 import AOS from 'aos';
 
 import heroBg1 from '../../landing/assets/img/hero_bg_1.jpg';
-import { Footer } from './Footer';
-import PropertyCard from './PropertyCard';
+import { Footer } from '../../components/common/Footer';
+import PropertyCard from '../../components/common/PropertyCard';
 import axios from 'axios';
 
 

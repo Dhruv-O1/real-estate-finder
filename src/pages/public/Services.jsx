@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Navbar } from './Navbar'
+import { Navbar } from '../../components/common/Navbar'
 import '../../landing/assets/fonts/icommon/style.css';
 import '../../landing/assets/fonts/flaticon/flaticon.css';
 import '../../landing/css/tiny-slider.css';
@@ -15,8 +15,8 @@ import 'tiny-slider/dist/tiny-slider.css';
 import AOS from 'aos';
 
 import heroBg2 from '../../landing/assets/img/hero_bg_2.jpg';
-import { Footer } from './Footer';
-import { Testimonials } from './Testimonials';
+import { Footer } from '../../components/common/Footer';
+import { Testimonials } from '../../components/common/Testimonials';
 
 
 export const Services = () => {

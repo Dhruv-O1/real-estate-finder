@@ -17,9 +17,9 @@ import AOS from 'aos';
 import heroBg1 from '../../landing/assets/img/hero_bg_1.jpg';
 // import PropertyCard from './PropertyCard';
 import axios from 'axios';
-import { Footer } from '../common/Footer';
-import PropertyCard from '../common/PropertyCard';
-import { AdminNavbar } from './AdminNavbar';
+import { Footer } from '../../components/common/Footer';
+import PropertyCard from '../../components/common/PropertyCard';
+import { AdminNavbar } from '../../components/admin/AdminNavbar';
 
 
 export const AllProperty = () => {

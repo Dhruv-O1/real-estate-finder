@@ -17,7 +17,7 @@ export const ForgotPassword = () => {
     alert(`Password reset link sent to ${email}`);
     console.log(email)
     const res = await axios.post("/forgotpassword", null, {
-        params: { email } // Send email as URL query parameter
+        params: { email,origin: window.location.origin } // Send email as URL query parameter
       })
     // const res = await axios.post("api/forgotpassword?email=" + email)
     console.log(res.data)

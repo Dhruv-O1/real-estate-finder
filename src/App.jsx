@@ -6,27 +6,27 @@
 
 import { UserSidebar } from './components/layouts/UserSidebar'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { Signup } from './components/common/Signup'
-import { Login } from './components/common/Login'
+import { Signup } from './pages/auth/Signup'
+import { Login } from './pages/auth/Login'
 import { LandingPage } from './components/common/LandingPage'
-import { Landing } from './components/common/Landing'
-import { About } from './components/common/About'
-import { ContactUs } from './components/common/ContactUs'
-import { PropertSingle } from './components/common/PropertSingle'
-import { Properties } from './components/common/Properties'
-import { Services } from './components/common/Services'
-import { AddProperty } from './components/user/AddProperty'
+import { Landing } from './pages/public/Landing'
+import { About } from './pages/public/About'
+import { ContactUs } from './pages/public/ContactUs'
+import { PropertySingle } from './pages/public/PropertySingle'
+import { Properties } from './pages/public/Properties'
+import { Services } from './pages/public/Services'
+import { AddProperty } from './pages/user/AddProperty'
 import axios from 'axios'
 import PrivateRoutes from './hooks/PrivateRoutes'
 import { useEffect } from 'react'
-import {  InquiryForm } from './components/user/InquiryForm'
-import { PropertyInquiry } from './components/common/PropertyInquiry'
-import { Favourite } from './components/common/Favourite'
-import { ForgotPassword } from './components/common/ForgotPassword'
-import { ResetPassword } from './components/common/ResetPassword'
-import { AllUser } from './components/admin/AllUser'
-import { AllProperty } from './components/admin/AllProperty'
-import { AllInquiry } from './components/admin/AllInquiry'
+import {  InquiryForm } from './pages/user/InquiryForm'
+import { PropertyInquiry } from './pages/public/PropertyInquiry'
+import { Favourite } from './pages/public/Favourite'
+import { ForgotPassword } from './pages/auth/ForgotPassword'
+import { ResetPassword } from './pages/auth/ResetPassword'
+import { AllUser } from './pages/admin/AllUser'
+import { AllProperty } from './pages/admin/AllProperty'
+import { AllInquiry } from './pages/admin/AllInquiry'
 
 
 
@@ -96,7 +96,7 @@ function App() {
 
 
         <Route path="/add-property" element={<AddProperty />} />
-        <Route path='/singleproperty/:propertyid' element={<PropertSingle/>}></Route>
+        <Route path='/singleproperty/:propertyid' element={<PropertySingle/>}></Route>
         <Route path='/inquiry/:propertyid' element={<PropertyInquiry/>}></Route>
 
 
