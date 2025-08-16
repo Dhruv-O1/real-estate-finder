@@ -49,7 +49,7 @@ export const Navbar = () => {
     setloggedin(false)
     
   }
-  console.log(loggedin);
+  console.log("Dhruv",loggedin);
   
   return (
     <div>
