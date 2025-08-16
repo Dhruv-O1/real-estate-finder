@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 
@@ -15,7 +15,42 @@ import '../../landing/js/tiny-slider';
 
 export const Navbar = () => {
   const location = useLocation()
+  const [loggedin, setloggedin] = useState(false)
+  
 
+  useEffect(() => {
+    checkLogin()
+  
+   
+  }, [])
+  
+
+  const checkLogin = () => {
+    const id = localStorage.getItem("id")
+    console.log(id);
+    
+    if (id === null) {
+      setloggedin(false)
+      console.log(loggedin);
+      
+    }else{
+
+      setloggedin(true)
+      console.log(loggedin);
+      
+    }
+  }
+
+  const logout = () => {
+    console.log("Logout Clicked...");
+    alert("Please conform you really have to logout!")
+    localStorage.removeItem('id'); 
+    localStorage.removeItem('role'); 
+    setloggedin(false)
+    
+  }
+  console.log(loggedin);
+  
   return (
     <div>
       <div className="site-mobile-menu site-navbar-target">
@@ -124,9 +159,39 @@ export const Navbar = () => {
             <li className={location.pathname === '/favouriteprop' ? 'active' : ''}>
               <Link to="/favouriteprop">Favourite </Link>
             </li>
-            <li className={location.pathname === '/login' ? 'active' : ''}>
-              <Link to="/login">Login</Link>
+            <li>
+            {
+                loggedin ? (
+                  
+                  
+                  <button
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "#ffffff80", // Match your nav text color
+                      padding: "10px 15px", // Match your nav link padding
+                      fontFamily: "inherit",
+                      fontSize: "inherit",
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      transition: "color 0.3s ease",
+                      // Add hover effects inline using event handlers if needed
+                    }}
+                    onMouseOver={(e) => (e.target.style.color = "#ffffff")} // Your hover color
+                    onMouseOut={(e) => (e.target.style.color = "#ffffff80")} // Original color
+                    onClick={logout}
+                  >
+                    Logout
+                  </button>
+                
+                ) : (
+                  
+                    <Link to="/login">Login</Link>
+                  
+                )
+              }
             </li>
+            
           </ul>
           <Link
             to="#"
